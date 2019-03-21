@@ -2,21 +2,26 @@ import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 
 import './main.html';
+import '../lib/collection.js';
 
-Template.hello.onCreated(function helloOnCreated() {
-  // counter starts at 0
-  this.counter = new ReactiveVar(0);
+Template.myJumbo.events({
+	'click .js-addimage'(event){
+		$('#addimage1').modal("show");
+
+	}
+	
 });
 
-Template.hello.helpers({
-  counter() {
-    return Template.instance().counter.get();
-  },
-});
-
-Template.hello.events({
-  'click button'(event, instance) {
-    // increment the counter when button is clicked
-    instance.counter.set(instance.counter.get() + 1);
-  },
-});
+ Template.addimage.events({
+ 	'click .js-saveimage'(event){
+ 		var imagetitle = $("#imagetitle").val();
+ 		var imagepath = $("#imagepath").val();
+ 		var imagedesc = $("#imagedesc").val();
+ 		console.log("save",imagepath,imagetitle,imagedesc);
+ 		$("#addimage1").modal("hide");
+ 	},
+ 	'change #addimagepreview'(event){
+ 		var imagepath = $("#imagepath").val();
+ 		
+ 	}
+ });
